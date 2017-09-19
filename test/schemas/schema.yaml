@@ -1,0 +1,18 @@
+type: "object"
+required:
+  - "config"
+  - "document"
+properties:
+  document:
+    type: "object"
+    additionalProperties: false
+    required:
+      - "id"
+      - "names"
+    properties:
+      id:
+        type: "number"
+      names:
+        type: "array"
+        items:
+          type: "string"

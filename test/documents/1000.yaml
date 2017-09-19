@@ -1,0 +1,14 @@
+$merge:
+  source:
+    $import:
+      path: "../defaults/defaults.yaml"
+      params:
+        id: 1000
+        names:
+          - "name 1"
+          - "name 2"
+  with:
+    config:
+      validationSchema: "../schemas/schema.yaml"
+    document:
+      test: "__NILL__"

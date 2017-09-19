@@ -1,0 +1,28 @@
+{
+  "name": "data-document-creator",
+  "version": "0.0.1",
+  "description": "Creates JSON and XML documents",
+  "main": "src/index.js",
+  "bin": {
+    "data-document-creator": "./bin/data-document-creator.js"
+  },
+  "scripts": {
+    "test": "npm run clean && node ./bin/data-document-creator.js --input 'test/documents/*.yaml' --output-directory './output'",
+    "clean": "rimraf ./output"
+  },
+  "author": "Niek Bosch <just.niek@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "ajv": "^5.2.2",
+    "commander": "^2.11.0",
+    "deep-filter": "^1.0.2",
+    "fs-extra": "^4.0.1",
+    "glob": "^7.1.2",
+    "js-yaml": "^3.9.1",
+    "json-merger": "^0.0.24",
+    "xmlbuilder": "^9.0.4"
+  },
+  "devDependencies": {
+    "rimraf": "^2.6.2"
+  }
+}

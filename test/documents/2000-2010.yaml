@@ -1,0 +1,11 @@
+$repeat:
+  range: "2000:2010"
+  value:
+    $import:
+      path: "../defaults/defaults.yaml"
+      params:
+        id:
+          $expression: "$repeat.value"
+        names:
+          - "name 1"
+          - "name 2"

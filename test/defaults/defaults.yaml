@@ -1,0 +1,10 @@
+config:
+  outputDirectory: "products"
+  outputFormat: "json"
+  outputFilename:
+    $expression: "`product-${$params.id}.json`"
+document:
+  id:
+    $expression: "$params.id"
+  names:
+    $expression: "$params.names"
