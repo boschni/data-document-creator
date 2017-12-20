@@ -15,6 +15,8 @@ It should contain the following structure:
 }
 ```
 
+It is also possible to define an array with document descriptions to generate multiple documents.
+
 ### `config`
 The `config` property contains configuration data used when generating the document. Like the filename of the document.
 
@@ -144,4 +146,21 @@ data-document-creator -i 'product.json' -o 'test-data'
   "name": "Some product",
   "price": 100
 }
+```
+
+### Command line options
+
+```
+Usage: data-document-creator [options]
+
+Options:
+
+  -V, --version                                 output the version number
+  -i, --input <files>                           Glob pattern to specify the documents to process
+  -o, --output-directory <path>                 The directory to output the processed documents to. If this param is not set the output is sent to stdout.
+  -r, --property-removal-indicator <indicator>  Remove all properties containing this value. Defaults to '__NILL__'.
+  -s, --skip-schema-validation                  Skip JSON schema validation. Defaults to false.
+  -v, --no-verbose                              Verbose output
+  -V, --no-verbose                              No verbose output
+  -h, --help                                    output usage information
 ```
