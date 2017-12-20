@@ -1,6 +1,6 @@
 {
   "name": "data-document-creator",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Creates JSON and XML documents",
   "main": "src/index.js",
   "bin": {
