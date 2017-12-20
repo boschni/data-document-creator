@@ -19,7 +19,7 @@
     "fs-extra": "^4.0.1",
     "glob": "^7.1.2",
     "js-yaml": "^3.9.1",
-    "json-merger": "^0.0.24",
+    "json-merger": "^1.0.0",
     "xmlbuilder": "^9.0.4"
   },
   "devDependencies": {
