@@ -4,7 +4,7 @@ var program = require("commander");
 var create = require("../src/index");
 
 program
-  .version("1.0.0")
+  .version("1.0.1")
   .option(
     "-i, --input <files>",
     "Glob pattern to specify the documents to process"
