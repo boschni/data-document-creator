@@ -5,9 +5,11 @@ This package can be used to generate JSON and XML documents.
 A document is generated with the help of a `document description`.
 
 ## `document description`
+
 A `document description` is a JSON or YAML file containing configuration used to generate a `document`.
 
 It should contain the following structure:
+
 ```js
 {
   "config": Config;
@@ -18,28 +20,35 @@ It should contain the following structure:
 It is also possible to define an array with document descriptions to generate multiple documents.
 
 ### `config`
+
 The `config` property contains configuration data used when generating the document. Like the filename of the document.
 
 #### `config.outputDirectory`
+
 Use this property to define the directory where the generated document will be saved. For example `test-data/products`.
 
 #### `config.outputFilename`
+
 Use this property to define the generated document filename (with extension). For example `product-1.json`.
 
 #### `config.outputFormat`
+
 Use this property to define the generated document data format. For example `json` or `xml`.
 
 #### `config.validationSchema`
+
 Use this property to define a [JSON Schema](http://json-schema.org) used to validate the `document description`. For example `schemas/product-document-description.json`.
 
 If no `config.validationSchema` is defined it will not validate the document.
 
 ### `document`
+
 The `document` property contains the document content.
 
 ### Example
 
 **schema.json**
+
 ```json
 {
   "title": "Product document description",
@@ -64,6 +73,7 @@ The `document` property contains the document content.
 ```
 
 **product.json**
+
 ```json
 {
   "config": {
@@ -81,16 +91,77 @@ The `document` property contains the document content.
 ```
 
 **Command line**
+
 ```sh
 data-document-creator -i 'product.json' -o 'test-data'
 ```
 
 **test-data/products/product-1.json**
+
 ```json
 {
   "id": 1,
   "name": "Some product",
   "price": 100
+}
+```
+
+### Example with multiple documents
+
+**products.json**
+
+```json
+[
+  {
+    "config": {
+      "outputDirectory": "products",
+      "outputFilename": "product-1.json",
+      "outputFormat": "json"
+    },
+    "document": {
+      "id": 1,
+      "name": "Some product",
+      "price": 100
+    }
+  },
+  {
+    "config": {
+      "outputDirectory": "products",
+      "outputFilename": "product-2.json",
+      "outputFormat": "json"
+    },
+    "document": {
+      "id": 2,
+      "name": "Some other product",
+      "price": 200
+    }
+  }
+]
+```
+
+**Command line**
+
+```sh
+data-document-creator -i 'products.json' -o 'test-data'
+```
+
+**test-data/products/product-1.json**
+
+```json
+{
+  "id": 1,
+  "name": "Some product",
+  "price": 100
+}
+```
+
+**test-data/products/product-2.json**
+
+```json
+{
+  "id": 2,
+  "name": "Some other product",
+  "price": 200
 }
 ```
 
@@ -101,6 +172,7 @@ Input files are merged with `json-merger` before validating and creating the out
 Go to [https://www.npmjs.com/package/json-merger](https://www.npmjs.com/package/json-merger) for more information.
 
 **product-defaults.json**
+
 ```json
 {
   "config": {
@@ -117,6 +189,7 @@ Go to [https://www.npmjs.com/package/json-merger](https://www.npmjs.com/package/
 ```
 
 **product.json**
+
 ```json
 {
   "$merge": {
@@ -135,11 +208,13 @@ Go to [https://www.npmjs.com/package/json-merger](https://www.npmjs.com/package/
 ```
 
 **Command line**
+
 ```sh
 data-document-creator -i 'product.json' -o 'test-data'
 ```
 
 **test-data/products/product-1.json**
+
 ```json
 {
   "id": 1,
