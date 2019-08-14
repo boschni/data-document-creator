@@ -13,16 +13,16 @@
   "author": "Niek Bosch <just.niek@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "ajv": "^5.2.2",
-    "commander": "^2.11.0",
+    "ajv": "^6.10.2",
+    "commander": "^3.0.0",
     "deep-filter": "^1.0.2",
-    "fs-extra": "^4.0.1",
-    "glob": "^7.1.2",
-    "js-yaml": "^3.9.1",
-    "json-merger": "^1.0.0",
-    "xmlbuilder": "^9.0.4"
+    "fs-extra": "^8.1.0",
+    "glob": "^7.1.4",
+    "js-yaml": "^3.13.1",
+    "json-merger": "^1.1.1",
+    "xmlbuilder": "^13.0.2"
   },
   "devDependencies": {
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.7.0"
   }
 }

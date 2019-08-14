@@ -22,7 +22,7 @@ function create(userConfig) {
   };
 
   // Set config overrides
-  Object.keys(userConfig).forEach(function (key) {
+  Object.keys(userConfig).forEach(function(key) {
     if (typeof userConfig[key] !== "undefined") {
       config[key] = userConfig[key];
     }
@@ -38,39 +38,46 @@ function create(userConfig) {
   var filePaths = glob.sync(config.input);
 
   // process each document
-  filePaths.forEach(function (filePath) {
-
+  filePaths.forEach(function(filePath) {
     // Log
-    log("processing \"" + filePath + "\"", config, true);
+    log('processing "' + filePath + '"', config, true);
 
     // Do merge
     var mergedFile = merger.mergeFile(filePath);
 
     // Remove values matching the propertyRemovalIndicator
-    var filteredFile = deepFilter(mergedFile, function (value) {
+    var filteredFile = deepFilter(mergedFile, function(value) {
       return value !== config.propertyRemovalIndicator;
     });
 
     // Get document descriptions
-    var descriptions = Array.isArray(filteredFile) ? filteredFile : [filteredFile];
+    var descriptions = Array.isArray(filteredFile)
+      ? filteredFile
+      : [filteredFile];
 
     // Process the document descriptions
-    descriptions.forEach(function (description) {
-
+    descriptions.forEach(function(description) {
       // Validate if needed
       if (!config.skipSchemaValidation && description.config.validationSchema) {
-        var schemaPath = path.resolve(path.dirname(filePath), description.config.validationSchema);
+        var schemaPath = path.resolve(
+          path.dirname(filePath),
+          description.config.validationSchema
+        );
         var compiledSchema = loadCompiledJsonSchema(schemaPath);
 
         if (!compiledSchema(description)) {
-
-          var message = "An error was found while validating " + filePath + "\n\n";
+          var message =
+            "An error was found while validating " + filePath + "\n\n";
           message += "JSON:\n";
           message += JSON.stringify(description, undefined, 2) + "\n";
 
-          compiledSchema.errors.forEach(function (error) {
-            message += "\nMessage:\nThe property \"" + error.dataPath + "\" " + error.message;
-            message += "\n\nRule:\n" + schemaPath + error.schemaPath + "\n"
+          compiledSchema.errors.forEach(function(error) {
+            message +=
+              '\nMessage:\nThe property "' +
+              error.dataPath +
+              '" ' +
+              error.message;
+            message += "\n\nRule:\n" + schemaPath + error.schemaPath + "\n";
           });
 
           throw new Error(message);
@@ -87,7 +94,9 @@ function create(userConfig) {
 
       // Generate xml output if needed
       if (description.config.outputFormat === "xml") {
-        output = xmlbuilder.create(description.document, {encoding: "UTF-8"}).end({pretty: true});
+        output = xmlbuilder
+          .create(description.document, { encoding: "UTF-8" })
+          .end({ pretty: true });
       }
 
       // Write output to console?
@@ -97,11 +106,15 @@ function create(userConfig) {
       }
 
       // Write to file
-      var outputFilePath = path.join(config.outputDirectory, description.config.outputDirectory, description.config.outputFilename);
+      var outputFilePath = path.join(
+        config.outputDirectory,
+        description.config.outputDirectory,
+        description.config.outputFilename
+      );
       fsExtra.outputFileSync(outputFilePath, output, "utf8");
 
       // Log
-      log("wrote \"" + outputFilePath + "\"", config, true);
+      log('wrote "' + outputFilePath + '"', config, true);
     });
   });
 
@@ -127,7 +140,6 @@ var fileCache = {};
 
 function loadJsonOrYamlFile(filePath) {
   if (fileCache[filePath] === undefined) {
-
     var content = fsExtra.readFileSync(filePath, "utf8");
 
     var parsedContent;
